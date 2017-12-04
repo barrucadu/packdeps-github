@@ -1,0 +1,16 @@
+name:                packdeps-github
+version:             0.1.0.0
+synopsis:            Open issues on GitHub about outdated dependencies automatically
+homepage:            https://github.com/barrucadu/github
+license:             MIT
+license-file:        LICENSE
+author:              Michael Walker
+maintainer:          mike@barrucadu.co.uk
+build-type:          Simple
+extra-source-files:  README.markdown
+cabal-version:       >=1.10
+
+executable packdeps-github
+  main-is:             Main.hs
+  build-depends:       base >=4.9 && <4.10
+  default-language:    Haskell2010
