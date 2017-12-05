@@ -10,6 +10,11 @@ Usage
 -----
 
 ```
+$ cabal update
 $ packdeps-github example.config
-[Package {hackage = "packdeps-github", github = "barrucadu/packdeps-github"}]
+dejafu-0.9.1.0 is up-to-date
+llvm-general-3.5.1.2 is behind on transformers-0.5.5.0
 ```
+
+Always run `cabal update` before `packdeps-github`, or dependency
+information may be out-of-date.
