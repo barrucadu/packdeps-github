@@ -9,3 +9,17 @@ packages:
     github:  barrucadu/dummy
   - package: llvm-general
     github:  barrucadu/dummy
+
+# Issue template
+issue_template:
+  title: "Dependencies for {{package}}-{{version}} out of date"
+  body: |
+    Hi!
+
+    Some of the dependencies of {{package}}-{{version}} (the latest release on Hackage) are outdated:
+
+    {{dependencies}}
+
+    ---
+
+    This is an automatically opened issue.
