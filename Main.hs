@@ -6,6 +6,7 @@
 module Main where
 
 import           Data.Either             (lefts, rights)
+import qualified Data.Foldable           as F
 import           Data.Proxy              (Proxy(..))
 import qualified Data.Text               as T
 import qualified Distribution.PackDeps   as P
@@ -96,14 +97,20 @@ checkPackage auth snapshot pkg = case P.checkDeps snapshot (info pkg) of
     pkgname ver = hackage pkg ++ "-" ++ showVersion ver
     pkgname' (name, ver) = name ++ "-" ++ ver
 
--- | Open an issue on a repository.
+-- | Open an issue on a repository.  Doesn't open an issue if another
+-- with the same title exists.
 openIssue :: G.Auth -> Package -> String -> [String] -> IO ()
-openIssue auth pkg pkgname deps = G.createIssue auth (owner pkg) (repo pkg) issue >>= \case
-    Right issue -> putStrLn $ "    opened issue #" ++ show (G.issueNumber issue)
-    Left  err   -> putStrLn $ "    failed to open issue: " ++ show err
+openIssue auth pkg pkgname deps = G.issuesForRepo (owner pkg) (repo pkg) mempty >>= \case
+    Right issues -> case filter (\i -> G.issueTitle i == title) (F.toList issues) of
+      (issue:_) -> putStrLn $ "    pre-existing issue found: #" ++ show (G.issueNumber issue)
+      [] -> G.createIssue auth (owner pkg) (repo pkg) issue >>= \case
+        Right issue -> putStrLn $ "    opened issue #" ++ show (G.issueNumber issue)
+        Left  err   -> putStrLn $ "    failed to open issue: " ++ show err
+    Left err -> putStrLn $ "    failed to get list of issues: " ++ show err
   where
+    title = issueTitle pkgname
     issue = G.NewIssue
-      { G.newIssueTitle = issueTitle pkgname
+      { G.newIssueTitle = title
       , G.newIssueBody  = Just (issueBody pkgname deps)
       , G.newIssueAssignee  = Nothing
       , G.newIssueMilestone = Nothing
