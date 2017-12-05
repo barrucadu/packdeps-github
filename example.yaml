@@ -1,0 +1,11 @@
+# GitHub credentials:
+github:
+  username: username
+  password: password
+
+# List of packages to check
+packages:
+  - package: dejafu
+    github:  barrucadu/dummy
+  - package: llvm-general
+    github:  barrucadu/dummy

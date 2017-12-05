@@ -13,8 +13,11 @@ cabal-version:       >=1.10
 executable packdeps-github
   main-is:             Main.hs
   build-depends:       base     >=4.9  && <4.10
+                     , aeson
+                     , bytestring
                      , Cabal    >=1.24 && <2.1
                      , github   >=0.16 && <0.19
                      , packdeps >=0.4  && <0.5
                      , text
+                     , yaml
   default-language:    Haskell2010

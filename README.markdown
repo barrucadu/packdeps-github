@@ -11,7 +11,7 @@ Usage
 
 ```
 $ cabal update
-$ packdeps-github example.config
+$ packdeps-github example.yaml
 dejafu-0.9.1.0 is up-to-date
 llvm-general-3.5.1.2 is behind on transformers-0.5.5.0
     opened issue #2
@@ -23,7 +23,7 @@ information may be out-of-date.
 If an issue already exists, a new one won't be created:
 
 ```
-$ packdeps-github example.config
+$ packdeps-github example.yaml
 dejafu-0.9.1.0 is up-to-date
 llvm-general-3.5.1.2 is behind on transformers-0.5.5.0
     pre-existing issue found: #2
