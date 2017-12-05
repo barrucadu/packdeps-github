@@ -14,6 +14,7 @@ $ cabal update
 $ packdeps-github example.config
 dejafu-0.9.1.0 is up-to-date
 llvm-general-3.5.1.2 is behind on transformers-0.5.5.0
+    opened issue #2
 ```
 
 Always run `cabal update` before `packdeps-github`, or dependency
